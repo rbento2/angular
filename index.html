@@ -103,7 +103,7 @@
                 <option value="">Selecione uma operadora</option>
             </select>
             <button ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone" class="sucess">Adicionar contato</button>
-            <button ng-click="apagarContato(contatos)" class="danger" ng-disabled="!isContatoSelecionado(contatos)">Apagar contatos</button>
+            <button ng-click="apagarContato(contatos)" class="danger" ng-hide="!isContatoSelecionado(contatos)">Apagar contatos</button>
         </div>
         {{contato}}
     </body> 
