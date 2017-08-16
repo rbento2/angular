@@ -97,14 +97,16 @@
                     <td>{{contato.operadora.nome}}</td>
                 </tr>
             </table>
-            <input type="text" type="text" ng-model="contato.nome" class="nome" placeholder="Nome"/>
-            <input type="text" type="text" ng-model="contato.telefone" class="telefone" placeholder="Telefone"/>
-            <select name="" id="" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
-                <option value="">Selecione uma operadora</option>
-            </select>
-            <button ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone" class="sucess">Adicionar contato</button>
-            <button ng-click="apagarContato(contatos)" class="danger" ng-hide="!isContatoSelecionado(contatos)">Apagar contatos</button>
+            {{contatoForm.$valid}}
+            <form action="" name="contatoForm">
+                <input type="text" type="text" ng-model="contato.nome" class="nome" placeholder="Nome" ng-required="true"/>
+                <input type="text" type="text" ng-model="contato.telefone" class="telefone" placeholder="Telefone" ng-required="true"/>
+                <select name="" id="" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
+                    <option value="">Selecione uma operadora</option>
+                </select>
+            </form>
+            <button ng-click="adicionarContato(contato)"  class="sucess" ng-disabled="contatoForm.$invalid">Adicionar contato</button>
+            <button ng-click="apagarContato(contatos)" class="danger" ng-if="isContatoSelecionado(contatos)">Apagar contatos</button>
         </div>
-        {{contato}}
     </body> 
 </html>
