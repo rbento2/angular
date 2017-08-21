@@ -101,7 +101,7 @@
             </table>
             <form action="" name="contatoForm">
                 <input type="text" type="text" ng-model="contato.nome" class="nome" placeholder="Nome" name="nome" ng-minlength="10" ng-required="true"/>
-                <input type="text" type="text" ng-model="contato.telefone" class="telefone" name="telefone"placeholder="Telefone" ng-maxlength="11" ng-pattern="/^\d{4,5}-\d{4}$ /" ng-required="true"/>
+                <input type="text" type="text" ng-model="contato.telefone" class="telefone" name="telefone"placeholder="Telefone" ng-maxlength="11" ng-pattern="/^\d{4,5}-\d{4}$/" ng-required="true"/>
                 <select name="" id="" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
                     <option value="">Selecione uma operadora</option>
                 </select>
@@ -118,9 +118,10 @@
                     </p>
                 </div>
             </div>
-            <div ng-show="contatoForm.telefone.$invalid && contatoForm.telefone.$dirty" class="danger">
+            <div ng-show="contatoForm.telefone.$error.maxlength && contatoForm.telefone.$dirty" class="danger">
                 <p>
                     digite essa merda de telefone direito
+
                 </p> 
             </div>
             <button ng-click="adicionarContato(contato)"  class="sucess" ng-disabled="contatoForm.$invalid">Adicionar contato</button>
