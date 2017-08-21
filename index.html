@@ -2,9 +2,10 @@
 <html ng-app="listaTelefonica">
     <head>
         <title>Lista telefonica</title>
-        <script src="angular/angular.js"></script>
+        <script src="node_modules/angular/angular.js"></script>
+        <script src="node_modules/angular-messages/angular-messages.js"></script>
         <script>
-            angular.module("listaTelefonica", []);
+            angular.module("listaTelefonica", ["ngMessages"]);
             angular.module("listaTelefonica").controller("listaTelefonicaCrtl", function($scope){
                 $scope.app= "Lista Telefonica";
                 $scope.contatos = [
@@ -23,6 +24,7 @@
                 $scope.adicionarContato = function(contato){
                     $scope.contatos.push(contato);
                     delete $scope.contato;
+                    $scope.contatoForm.$setPristine();
                 };
                 $scope.apagarContato = function(contatos){
                    $scope.contatos = contatos.filter(function(contato){
@@ -97,14 +99,30 @@
                     <td>{{contato.operadora.nome}}</td>
                 </tr>
             </table>
-            {{contatoForm.$valid}}
             <form action="" name="contatoForm">
-                <input type="text" type="text" ng-model="contato.nome" class="nome" placeholder="Nome" ng-required="true"/>
-                <input type="text" type="text" ng-model="contato.telefone" class="telefone" placeholder="Telefone" ng-required="true"/>
+                <input type="text" type="text" ng-model="contato.nome" class="nome" placeholder="Nome" name="nome" ng-minlength="10" ng-required="true"/>
+                <input type="text" type="text" ng-model="contato.telefone" class="telefone" name="telefone"placeholder="Telefone" ng-maxlength="11" ng-pattern="/^\d{4,5}-\d{4}$ /" ng-required="true"/>
                 <select name="" id="" ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
                     <option value="">Selecione uma operadora</option>
                 </select>
             </form>
+            <div ng-messages="contatoForm.nome.$error"class="danger">
+                <div ng-message="required" ng-show="contatoForm.nome.$dirty" >
+                    <p>
+                        digite essa merda de Nome direito
+                    </p>
+                </div>
+                <div ng-message="minlength" ng-show="contatoForm.nome.$dirty" class="danger">
+                    <p>
+                        digite essa merda de Nome Completo
+                    </p>
+                </div>
+            </div>
+            <div ng-show="contatoForm.telefone.$invalid && contatoForm.telefone.$dirty" class="danger">
+                <p>
+                    digite essa merda de telefone direito
+                </p> 
+            </div>
             <button ng-click="adicionarContato(contato)"  class="sucess" ng-disabled="contatoForm.$invalid">Adicionar contato</button>
             <button ng-click="apagarContato(contatos)" class="danger" ng-if="isContatoSelecionado(contatos)">Apagar contatos</button>
         </div>
