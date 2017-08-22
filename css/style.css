@@ -1,0 +1,40 @@
+.bg-lista{
+    background: grey;
+    color: white;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    width: 800px;
+}
+.table{
+    text-align: center;
+    width: 100%;
+}
+tr {
+    padding: 50px;
+}
+input{
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+}
+button{
+    padding: 10px;
+    border: 0;
+    width: 100%;
+    margin: 5px;
+}
+select{
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+}
+.selecionado{
+    background: red;
+}
+.sucess{
+    background: greenyellow;
+}
+.danger{
+    background: red;
+}
